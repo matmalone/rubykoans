@@ -14,7 +14,17 @@
 #   about_triangle_project_2.rb
 #
 def triangle(a, b, c)
-  # WRITE THIS CODE
+    raise TriangleError if a <= 0 || b <= 0 or c <= 0
+    raise TriangleError if a + b <= c
+    raise TriangleError if b >= a + c
+
+    if a == b && a == c
+        return :equilateral
+    end
+    if a == b || b == c || a == c
+        return :isosceles 
+    end
+    :scalene
 end
 
 # Error class used in part 2.  No need to change this code.
