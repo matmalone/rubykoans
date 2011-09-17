@@ -18,11 +18,14 @@ class Proxy
         @object = target_object
         # ADD MORE CODE HERE
         @messages = []
+        @message_counts = {}
     end
 
     # WRITE CODE HERE
 
     def method_missing(method_name, *args, &block)
+        @message_counts[method_name] = @message_counts[method_name] ?
+        @message_counts[method_name] += 1 : 1
         @messages << method_name
         @object.send(method_name, *args, &block)
     end
@@ -31,7 +34,9 @@ class Proxy
         @messages.include?(method_name)
     end
 
-    #def number_of_times_called(method_name)
+    def number_of_times_called(method_name)
+        @message_counts[method_name].to_i
+    end
         
 
 end
